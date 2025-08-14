@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, 
+				initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Alarmataf</title>
+</head>
+
+<body>
+	<!-- Importation de la musique d'alarme -->
+    <audio id="musique_alarme" src="test.mp3" preload="auto"></audio>
+	<audio id="musique_alarme_madonna" src="madonna.mp3" preload="auto"></audio>
+
+	<div class="clock">
+		<h1>
+			ALARMATAF©
+		</h1>
+
+		<h3>
+			Petite alarme pour se rappeler de l'envoie des TAFs
+		</h3>
+
+		<!-- Affichage de l'heure actuelle-->
+		<div class="time" id="time">
+			00:00:00
+		</div>
+
+		<div class="input-row">
+
+			<p>Programmer une nouvelle alarme :</p>
+			<div class="input-field">
+				<input type="date"
+					id="alarmDate"
+					class="alarm-input"
+					min="">
+				<input type="time" id="alarmTime"
+					class="alarm-input">
+			</div>
+
+			<button id="setAlarm">
+				Set Alarm
+			</button>
+
+		</div>
+
+		<div class="alarms" id="alarms"></div>
+
+		<input type="checkbox" id="checkMadonna" onclick="madonnaMode()" autocomplete="off">
+
+	</div>
+
+	<script src="script.js"></script>
+
+
+</body>
+
+</html>
