@@ -12,7 +12,7 @@ body {
 
 .madonna-mode {
 	font-family: Arial, sans-serif;
-	background-image: url("madonna.jpg");
+	background-image: url("img/madonna.jpg");
 	background-size: contain;
 	color: #000000;
 	display: flex;
