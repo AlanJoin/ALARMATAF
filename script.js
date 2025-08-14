@@ -24,7 +24,7 @@ function alarmSetFunction() {
 	let now = new Date();
 	let selectedDate = new Date(dateInput.value + "T" + tInput.value+"Z");
 	if (selectedDate.valueOf() <= now.valueOf()) {
-		alert(`Date non valide : veuillez renseigner une date future` + now.valueOf() + selectedDate.valueOf());
+		alert(`Date non valide : veuillez renseigner une date future`);
 		return;
 	}
 	if (almTimesArray.includes(selectedDate.toString())) {
