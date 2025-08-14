@@ -22,7 +22,7 @@
 		</h1>
 
 		<h3>
-			Petite alarme pour se rappeler de l'envoie des TAFs
+			Petite alarme pour se rappeler de l'envoi des TAFs
 		</h3>
 
 		<!-- Affichage de l'heure actuelle-->
@@ -32,7 +32,7 @@
 
 		<div class="input-row">
 
-			<p>Programmer une nouvelle alarme :</p>
+			<p>Programmer une nouvelle alarme (en heure UTC) :</p>
 			<div class="input-field">
 				<input type="date"
 					id="alarmDate"
@@ -43,14 +43,14 @@
 			</div>
 
 			<button id="setAlarm">
-				Set Alarm
+				Définir l'alarme
 			</button>
-
 		</div>
 
+		<div><br>Prochaine(s) alarme(s) prévues :</div>
 		<div class="alarms" id="alarms"></div>
 
-		<input type="checkbox" id="checkMadonna" onclick="madonnaMode()" autocomplete="off">
+		<div>Madonna mode : <input type="checkbox" id="checkMadonna" onclick="madonnaMode()" autocomplete="off"></div>
 
 	</div>
 
