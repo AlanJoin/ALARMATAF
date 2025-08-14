@@ -21,11 +21,10 @@ function timeChangeFunction() {
 
 
 function alarmSetFunction() {
-	let now = Date.now();
-	let nowUTC = new Date(now);
-	let selectedDate = new Date(dateInput.value + "T" + tInput.value);
-	if (selectedDate.getTime() <= nowUTC.getTime()) {
-		alert(`Date non valide : veuillez renseigner une date future`);
+	let now = new Date();
+	let selectedDate = new Date(dateInput.value + "T" + tInput.value+"Z");
+	if (selectedDate.valueOf() <= now.valueOf()) {
+		alert(`Date non valide : veuillez renseigner une date future` + now.valueOf() + selectedDate.valueOf());
 		return;
 	}
 	if (almTimesArray.includes(selectedDate.toString())) {
@@ -38,7 +37,7 @@ function alarmSetFunction() {
     alarmDiv.classList.add("alarm");
     alarmDiv.innerHTML = `
         <span>
-        ${selectedDate.toLocaleString()}
+        ${selectedDate.toUTCString()}
         </span>
         <button class="delete-alarm">
         Delete
