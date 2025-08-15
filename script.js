@@ -64,9 +64,17 @@ function gestionAlarme({est_input=true, date, heure}={}) {
     //Ajout de l'alarme sur le HTML
     let alarmeDiv = document.createElement("div");
     alarmeDiv.classList.add("alarm");
+
+    let messageAlarme;
+    if (now.toDateString() < dateSelectionnee.toDateString()) {
+        messageAlarme = "Le " + dateSelectionnee.toISOString().substring(8, 10) + "/" + dateSelectionnee.toISOString().substring(5, 7) + " à " + dateSelectionnee.toISOString().substring(11, 16) + " UTC";
+    }
+    else {
+        messageAlarme = dateSelectionnee.toISOString().substring(11, 16) + " UTC";
+    }
     alarmeDiv.innerHTML = `
         <span>
-        ${dateSelectionnee.toUTCString()}
+        ${messageAlarme}
         </span>
         <button class="delete-alarm">
         Delete
