@@ -38,20 +38,28 @@ function afficherHeure() {
 /**
  * Fonction permettant d'ajouter une alarme ainsi que de la déclencher si elle est atteinte
  */
-function gestionAlarme() {
+function gestionAlarme({est_input=true, date, heure}={}) {
 	let now = new Date();
-	let dateSelectionnee = new Date(dateInput.value + "T" + tInput.value+"Z");
-    let tempsAvantAlarme = dateSelectionnee - now;
 
-    // Vérifie si l'alarme à ajouter n'est pas antérieure ou déjà établie
-	if (dateSelectionnee.valueOf() <= now.valueOf()) {
-		alert(`Date non valide : veuillez renseigner une date future`);
-		return;
-	}
-	if (listeTempsAlarme.includes(dateSelectionnee.toString())) {
-		alert(`Alarme déjà établie`);
-		return;
-	}
+    // Définition de la date d'Alarme si c'est issu d'un input
+    let dateSelectionnee;
+    if (est_input) {
+        dateSelectionnee = new Date(dateInput.value + "T" + tInput.value +"Z");  
+        // Vérifie si l'alarme à ajouter n'est pas antérieure ou déjà établie
+        if (dateSelectionnee.valueOf() <= now.valueOf()) {
+            alert(`Date non valide : veuillez renseigner une date future`);
+            return;
+        }
+        if (listeTempsAlarme.includes(dateSelectionnee.toString())) {
+            alert(`Alarme déjà établie`);
+            return;
+        }
+    }
+    else {
+        dateSelectionnee = new Date(date + "T" + heure +"Z");
+    }
+
+    let tempsAvantAlarme = dateSelectionnee - now;
 
     //Ajout de l'alarme sur le HTML
     let alarmeDiv = document.createElement("div");
@@ -95,8 +103,8 @@ function gestionAlarme() {
  * Activation du mode Madonna (pour plus de plaisir)
  */
 function madonnaMode() {
-  var bodyDuHTML = document.body;
-  var checkMadonna = document.getElementById("checkMadonna");
+  let bodyDuHTML = document.body;
+  let checkMadonna = document.getElementById("checkMadonna");
 
   bodyDuHTML.classList.toggle("madonna-mode"); // Changement de style
 
@@ -109,7 +117,31 @@ function madonnaMode() {
   }
 } 
 
+/**
+ * Fonction initialisant les alarmes par défaut sur le site (soit 15 minutes avant le début des TAFs)
+ */
+function setAlarmeDefaut() {
+    let now = (new Date()).toISOString().split('T'); // Array [jour, heure]
+
+    let listeAlarme;
+    if (now[1] <= "14:45") {
+        listeAlarme = ["05:45", "08:45", "11:45", "14:45"];
+    }
+    else {
+        listeAlarme = ["17:45", "23:45"];
+    }
+
+    for (const heureAlarme of listeAlarme) {
+        if (heureAlarme > now[1]) {
+            gestionAlarme({est_input:false, date:now[0], heure:heureAlarme});
+        }
+    }
+}
+
+
+/*Execution des fonctions*/
 afficherHeure();
 setInterval(afficherHeure, 1000);
+setAlarmeDefaut()
 btn.addEventListener("click", gestionAlarme);
 // Penser à trier la liste des dates à chaque input
