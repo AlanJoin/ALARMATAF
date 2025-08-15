@@ -36,6 +36,21 @@ function afficherHeure() {
 }
 
 /**
+ * Fonction qui trie les alarmes sur la page HTML
+ */
+function triAlarme(){
+    let divAlarme = histoAlarme.children;
+    [].slice
+    .call(divAlarme)
+    .sort(function(a, b) {
+        return a.id.localeCompare(b.id);
+    })
+    .forEach(function(val, index) {
+        histoAlarme.appendChild(val);
+    });
+}
+
+/**
  * Fonction permettant d'ajouter une alarme ainsi que de la déclencher si elle est atteinte
  */
 function gestionAlarme({est_input=true, date, heure}={}) {
@@ -64,6 +79,7 @@ function gestionAlarme({est_input=true, date, heure}={}) {
     //Ajout de l'alarme sur le HTML
     let alarmeDiv = document.createElement("div");
     alarmeDiv.classList.add("alarm");
+    alarmeDiv.id = dateSelectionnee.toISOString();
 
     let messageAlarme;
     if (now.toISOString().substring(5, 10)< dateSelectionnee.toISOString().substring(5, 10)) {
@@ -105,6 +121,7 @@ function gestionAlarme({est_input=true, date, heure}={}) {
     }, tempsAvantAlarme);
     histoAlarme.appendChild(alarmeDiv);
     listeTempsAlarme.push(dateSelectionnee.toString());
+    triAlarme();
 }
 
 /**
