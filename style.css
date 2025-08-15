@@ -22,6 +22,12 @@ body {
 	margin: 0;
 }
 
+.grid-clock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
 .clock {
 	text-align: center;
 	background-color: #fff;
@@ -29,6 +35,16 @@ body {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	padding: 20px;
 	width: 300px;
+}
+
+.case-madonna {
+	text-align: center;
+	background-color: #b9b6b66b;
+	border-radius: 5px;
+	padding: 5px;
+	position: fixed;
+    bottom: 0;
+    right: 0;
 }
 
 h1 {

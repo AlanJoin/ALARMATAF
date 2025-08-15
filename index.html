@@ -16,42 +16,48 @@
     <audio id="musique_alarme" src="mus/test.mp3" preload="auto"></audio>
 	<audio id="musique_alarme_madonna" src="mus/madonna.mp3" preload="auto"></audio>
 
-	<div class="clock">
-		<h1>
-			ALARMATAF<sup>&copy</sup>
-		</h1>
 
-		<h3>
-			Petite alarme pour se rappeler de l'envoi des TAFs
-		</h3>
+	<div class="grid-clock">
+		<div class="clock">
+			<h1>
+				ALARMATAF<sup>&copy</sup>
+			</h1>
 
-		<!-- Affichage de l'heure actuelle-->
-		<div class="temps" id="temps">
-			00:00:00
-		</div>
+			<h3>
+				Petite alarme pour se rappeler de l'envoi des TAFs
+			</h3>
 
-		<div class="input-row">
-
-			<p>Programmer une nouvelle alarme (en heure UTC) :</p>
-			<div class="input-field">
-				<input type="date"
-					id="dateAlarme"
-					class="alarm-input"
-					min="">
-				<input type="time" id="alarmTime"
-					class="alarm-input">
+			<!-- Affichage de l'heure actuelle-->
+			<div class="temps" id="temps">
+				00:00:00
 			</div>
 
-			<button id="setAlarm">
-				Définir l'alarme
-			</button>
+			<div class="input-row">
+
+				<p>Programmer une nouvelle alarme (en heure UTC) :</p>
+				<div class="input-field">
+					<input type="date"
+						id="dateAlarme"
+						class="alarm-input"
+						min="">
+					<input type="time" id="alarmTime"
+						class="alarm-input">
+				</div>
+
+				<button id="setAlarm">
+					Définir l'alarme
+				</button>
+			</div>
 		</div>
+		<div class = "clock">
+			<div><br>Prochaine(s) alarme(s) prévue(s) :</div>
+			<div class="alarms" id="alarms"></div>
+		</div>
+	</div>
 
-		<div><br>Prochaine(s) alarme(s) prévue(s) :</div>
-		<div class="alarms" id="alarms"></div>
-
-		<div>Madonna mode : <input type="checkbox" id="checkMadonna" onclick="madonnaMode()" autocomplete="off"></div>
-
+	<div class="case-madonna">
+		Madonna mode : 
+		<input type="checkbox" id="checkMadonna" onclick="madonnaMode()" autocomplete="off">
 	</div>
 
 	<script src="script.js"></script>
