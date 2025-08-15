@@ -66,7 +66,7 @@ function gestionAlarme({est_input=true, date, heure}={}) {
     alarmeDiv.classList.add("alarm");
 
     let messageAlarme;
-    if (now.toDateString() < dateSelectionnee.toDateString()) {
+    if (now.toISOString().substring(5, 10)< dateSelectionnee.toISOString().substring(5, 10)) {
         messageAlarme = "Le " + dateSelectionnee.toISOString().substring(8, 10) + "/" + dateSelectionnee.toISOString().substring(5, 7) + " à " + dateSelectionnee.toISOString().substring(11, 16) + " UTC";
     }
     else {
