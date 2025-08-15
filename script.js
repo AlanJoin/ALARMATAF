@@ -93,7 +93,7 @@ function gestionAlarme({est_input=true, date, heure}={}) {
         ${messageAlarme}
         </span>
         <button class="delete-alarm">
-        Delete
+        Supprimer
         </button>
     `;
     alarmeDiv
