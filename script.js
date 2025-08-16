@@ -20,7 +20,7 @@ let tInput = document.getElementById("alarmTime");
 
 // Variables pour afficher les alarmes déjà présentes
 let histoAlarme = document.getElementById("alarms");
-let listeTempsAlarme = [];
+let dicTempsAlarme = {};
 
 let interVal; // Interval entre l'alarme et l'heure actuelle
 
@@ -65,13 +65,25 @@ function gestionAlarme({est_input=true, date, heure}={}) {
             alert(`Date non valide : veuillez renseigner une date future`);
             return;
         }
-        if (listeTempsAlarme.includes(dateSelectionnee.toString())) {
+        if (dateSelectionnee.toString() in dicTempsAlarme) {
             alert(`Alarme déjà établie`);
             return;
         }
     }
     else {
         dateSelectionnee = new Date(date + "T" + heure +"Z");
+        if (dateSelectionnee.toString() in dicTempsAlarme) {
+            let checkboxCochee = document.getElementById("alarme-envoie-TAF").checked;
+            if (!checkboxCochee) {
+                let alarmeDiv = document.getElementById(dateSelectionnee.toISOString());
+                alarmeDiv.remove();
+                if (dateSelectionnee.toString() in dicTempsAlarme) {
+                    clearTimeout(dicTempsAlarme[dateSelectionnee.toString()]);
+                    delete dicTempsAlarme[dateSelectionnee.toString()];
+                }
+            }
+            return;
+        }
     }
 
     let tempsAvantAlarme = dateSelectionnee - now;
@@ -101,11 +113,12 @@ function gestionAlarme({est_input=true, date, heure}={}) {
         .addEventListener("click", () => {
             alarmeDiv.remove();
             clearTimeout(interVal);
-            const idx = listeTempsAlarme.indexOf(dateSelectionnee.toString());
-            if (idx !== -1) {
-                listeTempsAlarme.splice(idx, 1);
+            if (dateSelectionnee.toString() in dicTempsAlarme) {
+                delete dicTempsAlarme[dateSelectionnee.toString()];
             }
         });
+
+    
 
     // Met en place le compte à rebours et la popUp à afficher
     interVal = setTimeout(() => {
@@ -114,13 +127,12 @@ function gestionAlarme({est_input=true, date, heure}={}) {
         musique_alarme.pause();
         musique_alarme.currentTime = 0;
         alarmeDiv.remove();
-        const alarmIndex = listeTempsAlarme.indexOf(dateSelectionnee.toString());
-        if (alarmIndex !== -1) {
-            listeTempsAlarme.splice(alarmIndex, 1);
+        if (dateSelectionnee.toString() in dicTempsAlarme) {
+            delete dicTempsAlarme[dateSelectionnee.toString()];
         }
     }, tempsAvantAlarme);
     histoAlarme.appendChild(alarmeDiv);
-    listeTempsAlarme.push(dateSelectionnee.toString());
+    dicTempsAlarme[dateSelectionnee.toString()] = interVal;
     triAlarme();
 }
 
@@ -145,15 +157,15 @@ function madonnaMode() {
 /**
  * Fonction initialisant les alarmes par défaut sur le site (soit 15 minutes avant le début des TAFs)
  */
-function setAlarmeDefaut() {
+function setAlarmeEnvoiTAF() {
     let now = (new Date()).toISOString().split('T'); // Array [jour, heure]
 
     let listeAlarme;
     if (now[1] <= "14:45") {
-        listeAlarme = ["05:45", "08:45", "11:45", "14:45"];
+        listeAlarme = ["05:40", "08:40", "11:40", "14:40"];
     }
     else {
-        listeAlarme = ["17:45", "23:45"];
+        listeAlarme = ["22:31", "22:32", "17:40", "23:40"];
     }
 
     for (const heureAlarme of listeAlarme) {
@@ -167,6 +179,5 @@ function setAlarmeDefaut() {
 /*Execution des fonctions*/
 afficherHeure();
 setInterval(afficherHeure, 1000);
-setAlarmeDefaut()
 btn.addEventListener("click", gestionAlarme);
 // Penser à trier la liste des dates à chaque input

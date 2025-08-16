@@ -13,8 +13,8 @@
 
 <body>
 	<!-- Importation de la musique d'alarme -->
-    <audio id="musique_alarme" src="mus/outer_wilds.mp3" preload="auto"></audio>
-	<audio id="musique_alarme_madonna" src="mus/madonna.mp3" preload="auto"></audio>
+    <audio id="musique_alarme" src="mus/outer_wilds.mp3" preload="auto" autoplay></audio>
+	<audio id="musique_alarme_madonna" src="mus/madonna.mp3" preload="auto" autoplay></audio>
 
 
 	<div class="grid-clock">
@@ -30,6 +30,14 @@
 			<!-- Affichage de l'heure actuelle-->
 			<div class="temps" id="temps">
 				00:00:00
+			</div>
+
+			<div>
+				Alarme pour l'envoi des TAFs :
+				<label class="switch">
+					<input type="checkbox" onclick="setAlarmeEnvoiTAF()" autocomplete="off" id="alarme-envoie-TAF">
+					<span class="slider round"></span>
+				</label>
 			</div>
 
 			<div class="input-row">
