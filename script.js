@@ -69,7 +69,7 @@ function suppAlarme(dateSelectionnee){
 /**
  * Fonction permettant d'ajouter une alarme ainsi que de la déclencher si elle est atteinte
  */
-function gestionAlarme({est_input=true, date, heure}={}) {
+function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
 	let now = new Date();
 
     // Définition de la date d'Alarme si c'est issu d'un input
@@ -91,11 +91,11 @@ function gestionAlarme({est_input=true, date, heure}={}) {
     else {
         dateSelectionnee = new Date(date + "T" + heure +"Z");
         // On vérifie si l'alarme est déjà établie et si le switch est décoché, on la supprime
-            let checkboxCochee = document.getElementById("alarme-envoi-TAF").checked;
-            if (!checkboxCochee) {
-                suppAlarme(dateSelectionnee);
-                return;
-            }
+        let checkboxCochee = document.getElementById(id_checkbox).checked;
+        if (!checkboxCochee) {
+            suppAlarme(dateSelectionnee);
+            return;
+        }
         }
 
     let tempsAvantAlarme = dateSelectionnee - now;
@@ -132,7 +132,7 @@ function gestionAlarme({est_input=true, date, heure}={}) {
         musique_alarme.currentTime = 0;
         suppAlarme(dateSelectionnee);
     }, tempsAvantAlarme);
-    
+
     histoAlarme.appendChild(alarmeDiv);
     dicTempsAlarme[dateSelectionnee.toString()] = interVal;
     triAlarme();
@@ -167,16 +167,33 @@ function setAlarmeEnvoiTAF() {
         listeAlarme = ["05:40", "08:40", "11:40", "14:40"];
     }
     else {
-        listeAlarme = ["22:50", "22:32", "17:40", "23:40"];
+        listeAlarme = ["17:40", "23:40"];
     }
 
     for (const heureAlarme of listeAlarme) {
         if (heureAlarme > now[1]) {
-            gestionAlarme({est_input:false, date:now[0], heure:heureAlarme});
+            gestionAlarme({est_input:false, date:now[0], heure:heureAlarme, id_checkbox:"alarme-envoi-TAF"});
         }
     }
 }
 
+function setAlarmePrepaTAF() {
+    let now = (new Date()).toISOString().split('T'); // Array [jour, heure]
+
+    let listeAlarme;
+    if (now[1] <= "14:45") {
+        listeAlarme = ["04:50", "07:50", "10:50", "13:50"];
+    }
+    else {
+        listeAlarme = ["16:50", "22:50"];
+    }
+
+    for (const heureAlarme of listeAlarme) {
+        if (heureAlarme > now[1]) {
+            gestionAlarme({est_input:false, date:now[0], heure:heureAlarme, id_checkbox:"alarme-prepa-TAF"});
+        }
+    }
+}
 
 /*Execution des fonctions*/
 afficherHeure();
