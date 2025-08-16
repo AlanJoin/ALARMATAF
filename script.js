@@ -50,6 +50,22 @@ function triAlarme(){
     });
 }
 
+
+/**
+ * Fonction permettant de supprimer une alarme
+ */
+function suppAlarme(dateSelectionnee){
+    let alarmeDiv = document.getElementById(dateSelectionnee.toISOString());
+    if (alarmeDiv !== null) {
+        alarmeDiv.remove();
+    }
+    if (dateSelectionnee.toString() in dicTempsAlarme) {
+        clearTimeout(dicTempsAlarme[dateSelectionnee.toString()]);
+        delete dicTempsAlarme[dateSelectionnee.toString()];
+    }
+}
+
+
 /**
  * Fonction permettant d'ajouter une alarme ainsi que de la déclencher si elle est atteinte
  */
@@ -58,6 +74,7 @@ function gestionAlarme({est_input=true, date, heure}={}) {
 
     // Définition de la date d'Alarme si c'est issu d'un input
     let dateSelectionnee;
+
     if (est_input) {
         dateSelectionnee = new Date(dateInput.value + "T" + tInput.value +"Z");  
         // Vérifie si l'alarme à ajouter n'est pas antérieure ou déjà établie
@@ -70,21 +87,16 @@ function gestionAlarme({est_input=true, date, heure}={}) {
             return;
         }
     }
+
     else {
         dateSelectionnee = new Date(date + "T" + heure +"Z");
-        if (dateSelectionnee.toString() in dicTempsAlarme) {
-            let checkboxCochee = document.getElementById("alarme-envoie-TAF").checked;
+        // On vérifie si l'alarme est déjà établie et si le switch est décoché, on la supprime
+            let checkboxCochee = document.getElementById("alarme-envoi-TAF").checked;
             if (!checkboxCochee) {
-                let alarmeDiv = document.getElementById(dateSelectionnee.toISOString());
-                alarmeDiv.remove();
-                if (dateSelectionnee.toString() in dicTempsAlarme) {
-                    clearTimeout(dicTempsAlarme[dateSelectionnee.toString()]);
-                    delete dicTempsAlarme[dateSelectionnee.toString()];
-                }
+                suppAlarme(dateSelectionnee);
+                return;
             }
-            return;
         }
-    }
 
     let tempsAvantAlarme = dateSelectionnee - now;
 
@@ -110,15 +122,7 @@ function gestionAlarme({est_input=true, date, heure}={}) {
     `;
     alarmeDiv
         .querySelector(".delete-alarm")
-        .addEventListener("click", () => {
-            alarmeDiv.remove();
-            clearTimeout(interVal);
-            if (dateSelectionnee.toString() in dicTempsAlarme) {
-                delete dicTempsAlarme[dateSelectionnee.toString()];
-            }
-        });
-
-    
+        .addEventListener("click", function(){suppAlarme(dateSelectionnee);});
 
     // Met en place le compte à rebours et la popUp à afficher
     interVal = setTimeout(() => {
