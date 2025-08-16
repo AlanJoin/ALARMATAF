@@ -130,11 +130,9 @@ function gestionAlarme({est_input=true, date, heure}={}) {
         alert("Il est l'heure d'envoyer les TAFs !");
         musique_alarme.pause();
         musique_alarme.currentTime = 0;
-        alarmeDiv.remove();
-        if (dateSelectionnee.toString() in dicTempsAlarme) {
-            delete dicTempsAlarme[dateSelectionnee.toString()];
-        }
+        suppAlarme(dateSelectionnee);
     }, tempsAvantAlarme);
+    
     histoAlarme.appendChild(alarmeDiv);
     dicTempsAlarme[dateSelectionnee.toString()] = interVal;
     triAlarme();
@@ -169,7 +167,7 @@ function setAlarmeEnvoiTAF() {
         listeAlarme = ["05:40", "08:40", "11:40", "14:40"];
     }
     else {
-        listeAlarme = ["22:31", "22:32", "17:40", "23:40"];
+        listeAlarme = ["22:50", "22:32", "17:40", "23:40"];
     }
 
     for (const heureAlarme of listeAlarme) {
