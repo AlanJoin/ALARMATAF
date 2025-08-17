@@ -119,7 +119,7 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
             alarmeDiv.classList.add("alarm-envoi");
         }
         if (id_checkbox === "alarme-prepa-TAF") {
-            messageAlarme = "Préparation des TAfs : " + messageAlarme;
+            messageAlarme = "Préparation des TAFs : " + messageAlarme;
             alarmeDiv.classList.add("alarm-prepa");
         }
         if (id_checkbox === "alarme-reveil-vac") {
