@@ -49,12 +49,6 @@ body {
 	width: 400px;
 }
 
-#ytb-video {
-	display: flex;
-	justify-content: center;
-	border-radius: 10px;
-}
-
 .case-madonna {
 	text-align: center;
 	background-color: #b9b6b66b;
