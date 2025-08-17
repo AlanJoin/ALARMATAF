@@ -130,6 +130,24 @@ input[type="time"] {
 	font-size: 14px;
 }
 
+.alarm-envoi {
+	background-color: #a1e086;
+}
+
+.alarm-prepa {
+	background-color: #86e0d5;
+}
+
+.delete-alarm {
+  background-color: rgba(85, 85, 85, 0.382);
+  border-radius: 4px;
+  border-width: 0px;
+  color: #333333;
+}
+.delete-alarm:hover {
+  background-color: rgba(85, 85, 85, 0.525);
+}
+
 @keyframes fadeIn {
 	from {
 		opacity: 0;

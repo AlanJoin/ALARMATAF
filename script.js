@@ -112,6 +112,18 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
     else {
         messageAlarme = dateSelectionnee.toISOString().substring(11, 16) + " UTC";
     }
+
+    if (!est_input) {
+        if (id_checkbox === "alarme-envoi-TAF") {
+            messageAlarme = "Envoi des TAFs : " + messageAlarme;
+            alarmeDiv.classList.add("alarm-envoi");
+        }
+        if (id_checkbox === "alarme-prepa-TAF") {
+            messageAlarme = "Préparation des TAfs : " + messageAlarme;
+            alarmeDiv.classList.add("alarm-prepa");
+        }
+    }
+
     alarmeDiv.innerHTML = `
         <span>
         ${messageAlarme}
@@ -157,13 +169,13 @@ function madonnaMode() {
 } 
 
 /**
- * Fonction initialisant les alarmes par défaut sur le site (soit 15 minutes avant le début des TAFs)
+ * Fonction initialisant les alarmes pour l'envoi des TAFs (soit 20 minutes avant le début des TAFs)
  */
 function setAlarmeEnvoiTAF() {
     let now = (new Date()).toISOString().split('T'); // Array [jour, heure]
 
     let listeAlarme;
-    if (now[1] <= "14:45") {
+    if (now[1] <= "14:40") {
         listeAlarme = ["05:40", "08:40", "11:40", "14:40"];
     }
     else {
@@ -177,11 +189,14 @@ function setAlarmeEnvoiTAF() {
     }
 }
 
+/**
+ * Fonction initialisant les alarmes pour la préparation des TAFs (soit 20 minutes avant le début des TAFs)
+ */
 function setAlarmePrepaTAF() {
     let now = (new Date()).toISOString().split('T'); // Array [jour, heure]
 
     let listeAlarme;
-    if (now[1] <= "14:45") {
+    if (now[1] <= "13:50") {
         listeAlarme = ["04:50", "07:50", "10:50", "13:50"];
     }
     else {
