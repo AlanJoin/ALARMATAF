@@ -122,6 +122,10 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
             messageAlarme = "Préparation des TAfs : " + messageAlarme;
             alarmeDiv.classList.add("alarm-prepa");
         }
+        if (id_checkbox === "alarme-reveil-vac") {
+            messageAlarme = "Réveil : " + messageAlarme;
+            alarmeDiv.classList.add("alarm-reveil");
+        }
     }
 
     alarmeDiv.innerHTML = `
@@ -139,7 +143,7 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
     // Met en place le compte à rebours et la popUp à afficher
     interVal = setTimeout(() => {
         musique_alarme.play();
-        alert("Il est l'heure d'envoyer les TAFs !");
+        alert("Il est l'heure d'envoyer les TAFs !" + date + heure);
         musique_alarme.pause();
         musique_alarme.currentTime = 0;
         suppAlarme(dateSelectionnee);
@@ -209,6 +213,75 @@ function setAlarmePrepaTAF() {
         }
     }
 }
+
+/**
+ * Fonction pour renvoyer le prochain reveil (5h local du matin) en heure UTC
+ */
+function getNextReveilUTC() {
+  const timeZone = 'Europe/Paris';
+  const now = new Date();
+
+  // Obtenir les composants de la date actuelle en Europe/Paris
+  const formatter = new Intl.DateTimeFormat('fr-FR', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+
+  const parts = formatter.formatToParts(now);
+  const day = parts.find(p => p.type === 'day').value;
+  const month = parts.find(p => p.type === 'month').value;
+  const year = parts.find(p => p.type === 'year').value;
+
+  // Obtenir l'offset actuel de Paris par rapport à UTC (en minutes)
+  const tzString = now.toLocaleString("en-US", { timeZone, timeZoneName: "short" });
+  const match = tzString.match(/GMT([+-]\d{1,2})(?::(\d{2}))?/);
+
+  const offsetHours = parseInt(match[1], 10);
+  const offsetMinutes = parseInt(match[2] || "0", 10);
+  const totalOffsetMinutes = offsetHours * 60 + (offsetHours >= 0 ? offsetMinutes : -offsetMinutes);
+
+  // Créer une date pour aujourd'hui à 5h Paris
+  let dateUTC = new Date(Date.UTC(
+    parseInt(year),
+    parseInt(month) - 1,
+    parseInt(day),
+    5 - (totalOffsetMinutes / 60),
+    0, 0, 0
+  ));
+
+  // Si déjà passé, passer au lendemain
+  if (dateUTC <= now) {
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate() + 1);
+
+    const partsTomorrow = formatter.formatToParts(tomorrow);
+    const dayT = partsTomorrow.find(p => p.type === 'day').value;
+    const monthT = partsTomorrow.find(p => p.type === 'month').value;
+    const yearT = partsTomorrow.find(p => p.type === 'year').value;
+
+    dateUTC = new Date(Date.UTC(
+      parseInt(yearT),
+      parseInt(monthT) - 1,
+      parseInt(dayT),
+      5 - (totalOffsetMinutes / 60),
+      0, 0, 0
+    ));
+  }
+
+  return dateUTC;
+}
+
+/**
+ * Fonction pour le reveil à 5 heures du matin
+ */
+function setReveilMatin(){
+    let heureReveil = getNextReveilUTC().toISOString().split('T');
+    gestionAlarme({est_input:false, date:heureReveil[0], heure:heureReveil[1].substring(0, 5), id_checkbox:"alarme-reveil-vac"});
+
+}
+
 
 /*Execution des fonctions*/
 afficherHeure();

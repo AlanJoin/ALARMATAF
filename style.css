@@ -138,6 +138,10 @@ input[type="time"] {
 	background-color: #f7fdb5;
 }
 
+.alarm-reveil {
+	background-color: #b5fdfd;
+}
+
 .delete-alarm {
   background-color: rgba(85, 85, 85, 0.382);
   border-radius: 4px;
