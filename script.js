@@ -107,10 +107,10 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
 
     let messageAlarme;
     if (now.toISOString().substring(5, 10)< dateSelectionnee.toISOString().substring(5, 10)) {
-        messageAlarme = "Le " + dateSelectionnee.toISOString().substring(8, 10) + "/" + dateSelectionnee.toISOString().substring(5, 7) + " à " + dateSelectionnee.toISOString().substring(11, 16) + " UTC";
+        messageAlarme = "Le " + dateSelectionnee.toISOString().substring(8, 10) + "/" + dateSelectionnee.toISOString().substring(5, 7) + " à " + dateSelectionnee.toISOString().substring(11, 16) + " UTC ";
     }
     else {
-        messageAlarme = dateSelectionnee.toISOString().substring(11, 16) + " UTC";
+        messageAlarme = dateSelectionnee.toISOString().substring(11, 16) + " UTC ";
     }
 
     if (!est_input) {
