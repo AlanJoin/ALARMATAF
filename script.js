@@ -143,7 +143,7 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
     // Met en place le compte à rebours et la popUp à afficher
     interVal = setTimeout(() => {
         musique_alarme.play();
-        alert("Il est l'heure d'envoyer les TAFs !" + date + heure);
+        alert("Il est l'heure d'envoyer les TAFs !");
         musique_alarme.pause();
         musique_alarme.currentTime = 0;
         suppAlarme(dateSelectionnee);
