@@ -18,7 +18,7 @@
 
 
 	<div class="grid-clock">
-		<div class="clock">
+		<div class="clock-principale">
 			<h1>
 				ALARMATAF<sup>&copy</sup>
 			</h1>
@@ -28,33 +28,37 @@
 			</h3>
 
 			<!-- Affichage de l'heure actuelle-->
+			<div class="temps">Temps actuel</div>
 			<div class="temps" id="temps">
 				00:00:00
 			</div>
 
-			<div>
+			<div class="choix-reveil">
+				<div>
 				Alarme pour l'envoi des TAFs :
 				<label class="switch">
 					<input type="checkbox" onclick="setAlarmeEnvoiTAF()" autocomplete="off" id="alarme-envoi-TAF">
 					<span class="slider round"></span>
 				</label>
+				</div>
+
+				<div>
+					Alarme pour la préparation des TAFs :
+					<label class="switch">
+						<input type="checkbox" onclick="setAlarmePrepaTAF()" autocomplete="off" id="alarme-prepa-TAF">
+						<span class="slider round"></span>
+					</label>
+				</div>
+
+				<div>
+					Réveil (5h du matin) :
+					<label class="switch">
+						<input type="checkbox" onclick="setReveilMatin()" autocomplete="off" id="alarme-reveil-vac">
+						<span class="slider round"></span>
+					</label>
+				</div>
 			</div>
 
-			<div>
-				Alarme pour la préparation des TAFs :
-				<label class="switch">
-					<input type="checkbox" onclick="setAlarmePrepaTAF()" autocomplete="off" id="alarme-prepa-TAF">
-					<span class="slider round"></span>
-				</label>
-			</div>
-
-			<div>
-				Réveil (5h du matin) :
-				<label class="switch">
-					<input type="checkbox" onclick="setReveilMatin()" autocomplete="off" id="alarme-reveil-vac">
-					<span class="slider round"></span>
-				</label>
-			</div>
 
 			<div class="input-row">
 

@@ -32,7 +32,7 @@ function afficherHeure() {
 	let hrs = String(now.getUTCHours()).padStart(2, "0");
 	let min = String(now.getUTCMinutes()).padStart(2, "0");
 	let sec = String(now.getUTCSeconds()).padStart(2, "0");
-	temps.textContent = `Temps actuel \n ${hrs}:${min}:${sec} UTC`;
+	temps.textContent = `${hrs}:${min}:${sec} UTC`;
 }
 
 /**
