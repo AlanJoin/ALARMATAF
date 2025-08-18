@@ -13,8 +13,9 @@
 
 <body>
 	<!-- Importation de la musique d'alarme -->
-    <audio id="musique_alarme" src="mus/outer_wilds.mp3" preload="auto" autoplay></audio>
-	<audio id="musique_alarme_madonna" src="mus/madonna.mp3" preload="auto" autoplay></audio>
+    <audio id="musique_alarme" src="mus/outer_wilds.mp3" preload="auto"></audio>
+	<audio id="musique_alarme_madonna" src="mus/madonna.mp3" preload="auto"></audio>
+	<audio id="musique_test" src="mus/lizard-button.mp3" preload="auto"></audio>
 
 
 	<div class="grid-clock">
@@ -81,6 +82,11 @@
 			<div><br>Prochaine(s) alarme(s) prévue(s) :</div>
 			<div class="alarms" id="alarms"></div>
 		</div>
+	</div>
+
+	<div id="boutonTestSon">
+		Test du son de l'ordinateur :
+		<input type="image" id="myimage" src="img/lizard.png" class="bouton_cercle" onclick="playTestMusic()"/>
 	</div>
 
 	<div class="case-madonna">

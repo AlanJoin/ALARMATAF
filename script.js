@@ -154,23 +154,6 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
     triAlarme();
 }
 
-/**
- * Activation du mode Madonna (pour plus de plaisir)
- */
-function madonnaMode() {
-  let bodyDuHTML = document.body;
-  let checkMadonna = document.getElementById("checkMadonna");
-
-  bodyDuHTML.classList.toggle("madonna-mode"); // Changement de style
-
-  // Changement de musique
-  if (checkMadonna.checked == true) {
-	musique_alarme = document.getElementById("musique_alarme_madonna");
-  }
-  else {
-	musique_alarme = document.getElementById("musique_alarme");
-  }
-} 
 
 /**
  * Fonction initialisant les alarmes pour l'envoi des TAFs (soit 20 minutes avant le début des TAFs)
@@ -280,6 +263,33 @@ function setReveilMatin(){
     let heureReveil = getNextReveilUTC().toISOString().split('T');
     gestionAlarme({est_input:false, date:heureReveil[0], heure:heureReveil[1].substring(0, 5), id_checkbox:"alarme-reveil-vac"});
 
+}
+
+/**
+ * Activation du mode Madonna (pour plus de plaisir)
+ */
+function madonnaMode() {
+  let bodyDuHTML = document.body;
+  let checkMadonna = document.getElementById("checkMadonna");
+
+  bodyDuHTML.classList.toggle("madonna-mode"); // Changement de style
+
+  // Changement de musique
+  if (checkMadonna.checked == true) {
+	musique_alarme = document.getElementById("musique_alarme_madonna");
+  }
+  else {
+	musique_alarme = document.getElementById("musique_alarme");
+  }
+} 
+
+/**
+ * Fonction permettant de faire jouer le son de test
+ */
+function playTestMusic() {
+    let son_test = document.getElementById("musique_test");
+    son_test.currentTime=0;
+    son_test.play();
 }
 
 

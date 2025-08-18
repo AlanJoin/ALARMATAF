@@ -252,3 +252,19 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/*Classe pour le bouton de test*/
+.bouton_cercle {
+  background-color: #f8f8f8;
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+  align-items: center;
+}
+
+.bouton_cercle:hover {
+	background-color: #cadefc;
+}
