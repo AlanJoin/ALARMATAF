@@ -297,4 +297,11 @@ function playTestMusic() {
 afficherHeure();
 setInterval(afficherHeure, 1000);
 btn.addEventListener("click", gestionAlarme);
-// Penser à trier la liste des dates à chaque input
+
+/* Introdcution d'un bout de script permettant de maintenir l'écran en éveil */
+screenLock = navigator.wakeLock.request('screen');
+document.addEventListener('visibilitychange', async () => {
+  if (screenLock !== null && document.visibilityState === 'visible') {
+    screenLock = await navigator.wakeLock.request('screen');
+  }
+});
