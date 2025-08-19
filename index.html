@@ -6,6 +6,10 @@
 	<meta name="viewport"
 		content="width=device-width, 
 				initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=VT323&display=swap" rel="stylesheet">
+
 	<link rel="stylesheet" href="style.css">
 	<title>ALARMATAF</title>
 	<link rel="icon" type="image/png" href="img/alarme.png">
@@ -17,9 +21,9 @@
 	<audio id="musique_alarme_madonna" src="mus/madonna.mp3" preload="auto"></audio>
 	<audio id="musique_test" src="mus/lizard-button.mp3" preload="auto"></audio>
 
-
 	<div class="grid-clock">
-		<div class="clock-principale">
+
+		<div class = "entete">
 			<h1>
 				ALARMATAF<sup>&copy</sup>
 			</h1>
@@ -29,14 +33,20 @@
 			</h3>
 
 			<!-- Affichage de l'heure actuelle-->
-			<div class="temps">Temps actuel</div>
-			<div class="temps" id="temps">
-				00:00:00
+			<div id="horloge">			
+				<h3 class="titre-columns">
+				<div class="temps" id="temps">
+					00:00:00
+				</div>
+				</h3>
 			</div>
+		</div>
 
+		<div class="clock-principale">
+			<h3 class="titre-columns">Configuration des alarmes</h3>
 			<div class="choix-reveil">
 				<div class="box-switch">
-				Alarme pour l'envoi des TAFs 
+				<label><b><font color="#6356D7">Envoi des TAFs</font></b> 10 minutes avant diffusion</label>
 				<label class="switch">
 					<input type="checkbox" onclick="setAlarmeEnvoiTAF()" autocomplete="off" id="alarme-envoi-TAF">
 					<span class="slider round"></span>
@@ -44,7 +54,7 @@
 				</div>
 
 				<div class="box-switch">
-					Alarme pour la préparation des TAFs 
+					<label><b><font color="#3984F3">Préparation des TAFs</font></b> 1 heure avant diffusion</label>
 					<label class="switch">
 						<input type="checkbox" onclick="setAlarmePrepaTAF()" autocomplete="off" id="alarme-prepa-TAF">
 						<span class="slider round"></span>
@@ -52,7 +62,7 @@
 				</div>
 
 				<div class="box-switch">
-					Réveil (5h du matin) 
+					<label><b><font color="#11BCAB">Réveil nocturne</font></b> 5 heures du matin</label>
 					<label class="switch">
 						<input type="checkbox" onclick="setReveilMatin()" autocomplete="off" id="alarme-reveil-vac">
 						<span class="slider round"></span>
@@ -63,7 +73,7 @@
 
 			<div class="input-row">
 
-				<p>Programmer une nouvelle alarme <br> en heure UTC :</p>
+				<h3>Programmer une nouvelle alarme (en heure UTC)</h3>
 				<div class="input-field">
 					<input type="date"
 						id="dateAlarme"
@@ -71,15 +81,15 @@
 						min="">
 					<input type="time" id="alarmTime"
 						class="alarm-input">
+					<button id="setAlarm">
+						Définir
+					</button>
 				</div>
-
-				<button id="setAlarm">
-					Définir l'alarme
-				</button>
 			</div>
 		</div>
+
 		<div class = "clock">
-			<div><br>Prochaine(s) alarme(s) prévue(s) :</div>
+			<h3 class="titre-columns">Prochaine(s) alarme(s) prévue(s) :</h3>
 			<div class="alarms" id="alarms"></div>
 		</div>
 	</div>
