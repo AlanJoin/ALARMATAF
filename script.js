@@ -148,7 +148,7 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox, label}={}) {
     interVal = setTimeout(() => {
         icone_alarme.href = "img/sirene_alerte.png";
         musique_alarme.play();
-        alert("Il est l'heure d'envoyer les TAFs !");
+        alert(messageAlarme + " → " + texteReveil);
         musique_alarme.pause();
         musique_alarme.currentTime = 0;
         icone_alarme.href = "img/sirene_ok.png";
