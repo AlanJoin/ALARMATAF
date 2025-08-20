@@ -19,6 +19,7 @@
 	<!-- Importation de la musique d'alarme -->
     <audio id="musique_alarme" src="mus/outer_wilds.mp3" preload="auto"></audio>
 	<audio id="musique_alarme_madonna" src="mus/madonna.mp3" preload="auto"></audio>
+	<audio id="musique_alarme_ouragan" src="mus/ouragan.mp3" preload="auto"></audio>
 	<audio id="musique_test" src="mus/lizard-button.mp3" preload="auto"></audio>
 
 	<div class="grid-clock">
@@ -101,8 +102,11 @@
 	</div>
 
 	<div class="case-madonna">
-		Madonna mode : 
-		<input type="checkbox" id="checkMadonna" onclick="madonnaMode()" autocomplete="off">
+		<select onchange="changeMode(this);" autocomplete="off">
+			<option value="">Mode par défaut</option>
+			<option value="madonna">Mode Madonna</option>
+			<option value="ouragan">Mode Ouragan</option>
+		</select>
 	</div>
 
 	<script src="script.js"></script>

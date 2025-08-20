@@ -189,7 +189,7 @@ function setAlarmePrepaTAF() {
     let now = (new Date()).toISOString().split('T'); // Array [jour, heure]
 
     let listeAlarme;
-    if (now[1] <= "13:50") {
+    if (now[1] <= "14:40") {
         listeAlarme = ["04:50", "07:50", "10:50", "13:50"];
     }
     else {
@@ -272,22 +272,22 @@ function setReveilMatin(){
 }
 
 /**
- * Activation du mode Madonna (pour plus de plaisir)
+ * Changement des musiques et du style de la page
  */
-function madonnaMode() {
-  let bodyDuHTML = document.body;
-  let checkMadonna = document.getElementById("checkMadonna");
+function changeMode(selectObject) {
+    let bodyDuHTML = document.body;
+    bodyDuHTML.className = '';
+    let value = selectObject.value;
+    if (value === ""){
+        musique_alarme = document.getElementById("musique_alarme");
+    }
+    else {
+        bodyDuHTML.classList.add("mode-"+value);
+        musique_alarme = document.getElementById("musique_alarme_"+value);
+    }
 
-  bodyDuHTML.classList.toggle("madonna-mode"); // Changement de style
 
-  // Changement de musique
-  if (checkMadonna.checked == true) {
-	musique_alarme = document.getElementById("musique_alarme_madonna");
-  }
-  else {
-	musique_alarme = document.getElementById("musique_alarme");
-  }
-} 
+}
 
 /**
  * Fonction permettant de faire jouer le son de test

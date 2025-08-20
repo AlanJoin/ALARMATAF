@@ -11,10 +11,22 @@ body {
 	margin: 0;
 }
 
-.madonna-mode {
+.mode-madonna {
 	font-family: Arial, sans-serif;
 	background-image: url("img/madonna.jpg");
 	background-size: contain;
+	color: #000000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+}
+
+.mode-ouragan {
+	font-family: Arial, sans-serif;
+	background-image: url("img/ouragan.jpg");
+	background-size: cover;
 	color: #000000;
 	display: flex;
 	justify-content: center;
@@ -151,7 +163,7 @@ input[type="time"]{
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	padding: 20px;
 	width: 400px;
-	height: 350px;
+	height: 380px;
 }
 
 .case-madonna {
@@ -338,4 +350,14 @@ input:checked + .slider:before {
 
 .bouton_cercle:hover {
 	background-color: #cadefc;
+}
+
+select {
+  /* Reset Select */
+  border: 0;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  background-color: var(--darkgray);
+  cursor: pointer;
 }
