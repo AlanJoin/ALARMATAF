@@ -14,6 +14,9 @@ let temps = document.getElementById("temps"); // Horloge à afficher
 let btn = document.getElementById("setAlarm");
 let musique_alarme = document.getElementById("musique_alarme");
 
+// Icone de l'onglet
+let icone_alarme = document.querySelector("link[rel~='icon']");
+
 // Date renseignée pour définir l'alarme
 let dateInput = document.getElementById("dateAlarme");
 let tInput = document.getElementById("alarmTime");
@@ -142,10 +145,12 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
 
     // Met en place le compte à rebours et la popUp à afficher
     interVal = setTimeout(() => {
+        icone_alarme.href = "img/sirene_alerte.png";
         musique_alarme.play();
         alert("Il est l'heure d'envoyer les TAFs !");
         musique_alarme.pause();
         musique_alarme.currentTime = 0;
+        icone_alarme.href = "img/sirene_ok.png";
         suppAlarme(dateSelectionnee);
     }, tempsAvantAlarme);
 
