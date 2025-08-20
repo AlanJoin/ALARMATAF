@@ -87,7 +87,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	gap : 1px;
+	gap : 3px;
 	width: 100%;
 }
 input[type="date"],
@@ -99,6 +99,20 @@ input[type="time"] {
 	width: 100%;
 	max-width: 150px;
 }
+
+input[type="text"] {
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	width: 100%;
+	max-width: 245px;
+	display:flex;
+	flex-direction: column;
+	padding: 10px;
+	margin-left: 45px;
+	margin-top: 3px;
+}
+
 input[type="time"]{
 	max-width: 70px;
 	justify-content: center;

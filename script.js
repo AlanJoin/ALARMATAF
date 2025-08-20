@@ -20,6 +20,7 @@ let icone_alarme = document.querySelector("link[rel~='icon']");
 // Date renseignée pour définir l'alarme
 let dateInput = document.getElementById("dateAlarme");
 let tInput = document.getElementById("alarmTime");
+let labelInput = document.getElementById("labelAlarme");
 
 // Variables pour afficher les alarmes déjà présentes
 let histoAlarme = document.getElementById("alarms");
@@ -72,11 +73,12 @@ function suppAlarme(dateSelectionnee){
 /**
  * Fonction permettant d'ajouter une alarme ainsi que de la déclencher si elle est atteinte
  */
-function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
+function gestionAlarme({est_input=true, date, heure, id_checkbox, label}={}) {
 	let now = new Date();
 
     // Définition de la date d'Alarme si c'est issu d'un input
     let dateSelectionnee;
+    let texteReveil;
 
     if (est_input) {
         dateSelectionnee = new Date(dateInput.value + "T" + tInput.value +"Z");  
@@ -89,6 +91,7 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
             alert(`Alarme déjà établie`);
             return;
         }
+        texteReveil = labelInput.value;
     }
 
     else {
@@ -99,6 +102,7 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
             suppAlarme(dateSelectionnee);
             return;
         }
+        texteReveil = label
         }
 
     let tempsAvantAlarme = dateSelectionnee - now;
@@ -118,22 +122,19 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox}={}) {
 
     if (!est_input) {
         if (id_checkbox === "alarme-envoi-TAF") {
-            messageAlarme = "Envoi des TAFs : " + messageAlarme;
             alarmeDiv.classList.add("alarm-envoi");
         }
         if (id_checkbox === "alarme-prepa-TAF") {
-            messageAlarme = "Préparation des TAFs : " + messageAlarme;
             alarmeDiv.classList.add("alarm-prepa");
         }
         if (id_checkbox === "alarme-reveil-vac") {
-            messageAlarme = "Réveil : " + messageAlarme;
             alarmeDiv.classList.add("alarm-reveil");
         }
     }
 
     alarmeDiv.innerHTML = `
         <span>
-        ${messageAlarme}
+        <b>${texteReveil}</b> ${messageAlarme}
         </span>
         <button class="delete-alarm">
         Supprimer
@@ -176,7 +177,7 @@ function setAlarmeEnvoiTAF() {
 
     for (const heureAlarme of listeAlarme) {
         if (heureAlarme > now[1]) {
-            gestionAlarme({est_input:false, date:now[0], heure:heureAlarme, id_checkbox:"alarme-envoi-TAF"});
+            gestionAlarme({est_input:false, date:now[0], heure:heureAlarme, id_checkbox:"alarme-envoi-TAF", label:"Envoi des TAFs"});
         }
     }
 }
@@ -197,7 +198,7 @@ function setAlarmePrepaTAF() {
 
     for (const heureAlarme of listeAlarme) {
         if (heureAlarme > now[1]) {
-            gestionAlarme({est_input:false, date:now[0], heure:heureAlarme, id_checkbox:"alarme-prepa-TAF"});
+            gestionAlarme({est_input:false, date:now[0], heure:heureAlarme, id_checkbox:"alarme-prepa-TAF", label:"Préparation des TAFs"});
         }
     }
 }
@@ -266,7 +267,7 @@ function getNextReveilUTC() {
  */
 function setReveilMatin(){
     let heureReveil = getNextReveilUTC().toISOString().split('T');
-    gestionAlarme({est_input:false, date:heureReveil[0], heure:heureReveil[1].substring(0, 5), id_checkbox:"alarme-reveil-vac"});
+    gestionAlarme({est_input:false, date:heureReveil[0], heure:heureReveil[1].substring(0, 5), id_checkbox:"alarme-reveil-vac", label:"Réveil"});
 
 }
 
@@ -302,6 +303,17 @@ function playTestMusic() {
 afficherHeure();
 setInterval(afficherHeure, 1000);
 btn.addEventListener("click", gestionAlarme);
+
+/**Ajout de l'évenement "entrée" à tous les inputs */
+function toucheEntreeAppuyee(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        btn.click();
+    }
+}
+dateInput.addEventListener("keypress", toucheEntreeAppuyee);
+tInput.addEventListener("keypress", toucheEntreeAppuyee);
+labelInput.addEventListener("keypress", toucheEntreeAppuyee);
 
 /* Introdcution d'un bout de script permettant de maintenir l'écran en éveil */
 screenLock = navigator.wakeLock.request('screen');
