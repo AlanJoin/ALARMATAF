@@ -1,0 +1,26 @@
+/*
+Fichier CSS définissant les différentes personnalisations de l'alarme
+*/
+
+.mode-madonna {
+	font-family: Arial, sans-serif;
+	background-image: url("../img/madonna.jpg");
+	background-size: contain;
+	color: #000000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+}
+.mode-ouragan {
+	font-family: Arial, sans-serif;
+	background-image: url("../img/ouragan.jpg");
+	background-size: cover;
+	color: #000000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+}
