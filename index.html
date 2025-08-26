@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0">
+	<title>ALARMATAF</title>
+
+	<!--Importation des polices d'écriture-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=VT323&display=swap" rel="stylesheet">
+
+	<!-- Style de la page -->
+	<link rel="stylesheet" href="style/main.css">
+	<link rel="stylesheet" href="style/switches.css">
+	<link rel="stylesheet" href="style/type_alarme.css">
+	<link rel="icon" type="image/png" href="img/sirene_ok.png">
+</head>
+
+<body>
+	<!-- Importation des musiques d'alarme -->
+    <audio id="musique_alarme" src="mus/outer_wilds.mp3" preload="auto"></audio>
+	<audio id="musique_test" src="mus/lizard-button.mp3" preload="auto"></audio>
+
+	<div class="grille-corps">
+		
+		<div class = "entete">
+			<h1>
+				ALARMATAF<sup>&copy</sup>
+			</h1>
+
+			<h3 id="description">
+				Outil d'Interêt Aéronautique permettant de définir <br> des alarmes pour la préparation et la diffusion des TAFs <br> (et également un réveil pour les vacations de nuit)
+			</h3>
+
+			<!-- Affichage de l'heure actuelle-->
+			<div id="horloge">			
+				<h3 class="titre-partie">
+				<span id="temps-reel">
+					00:00:00
+				</span> UTC
+				</h3>
+			</div>
+		</div>
+
+		<!-- Bloc dans lequel on va paramétrer l'alarme -->
+		<div id="block-config">
+			<h3 class="titre-partie">Configuration des alarmes</h3>
+		
+			<!-- Partie avec les différents switch -->
+			<div id="switches-alarme">
+				<div class="box-switch">
+					<label><b><font color="#6356D7">Envoi des TAFs</font></b> 10 minutes avant diffusion</label>
+					<label class="switch">
+						<input type="checkbox" onclick="setAlarmeEnvoiTAF()" autocomplete="off" id="alarme_envoi_TAF">
+						<span class="slider"></span>
+					</label>
+				</div>
+
+				<div class="box-switch">
+					<label><b><font color="#3984F3">Préparation des TAFs</font></b> 1 heure avant diffusion</label>
+					<label class="switch">
+						<input type="checkbox" onclick="setAlarmePrepaTAF()" autocomplete="off" id="alarme_prepa_TAF">
+						<span class="slider"></span>
+					</label>
+				</div>
+
+				<div class="box-switch">
+					<label><b><font color="#11BCAB">Réveil nocturne</font></b> 5 heures du matin</label>
+					<label class="switch">
+						<input type="checkbox" onclick="setReveilMatin()" autocomplete="off" id="alarme_reveil_vac">
+						<span class="slider"></span>
+					</label>
+				</div>
+			</div>
+
+			<!-- Partie de programmation des alarmes personnalisées -->
+			<div id="prog-alarme">
+				<h3>Programmer une nouvelle alarme (en heure UTC)</h3>
+				<div id="champ-input">
+					<input type="date" id="dateAlarme"	min="">
+					<input type="time" id="heureAlarme">
+					<button id="defAlarme">
+						Définir
+					</button>
+				</div>
+				<input type="text" id="labelAlarme" placeholder="Nom de l'alarme (optionnel)">
+			</div>
+		</div>
+
+		<!-- Bloc dans lequel on va afficher les alarmes déjà existantes -->
+		<div id = "blockAffichage">
+			<h3 class="titre-partie">Prochaine(s) alarme(s) prévue(s) :</h3>
+			<div id="listeAlarmes"></div>
+		</div>
+	</div>
+
+	<!-- Bouton de test son -->
+	<div id="boutonTestSon">
+		<div>Test son</div>
+		<input type="image" src="img/lizard.png" class="bouton_cercle" onclick="playTestMusic()"/>
+	</div>
+
+	<!-- Menu de personnalisation du site -->
+	<div id="choix-affichage">
+		<select onchange="changeMode(this);" autocomplete="off">
+			<option value="">Mode par défaut</option>
+			<option value="madonna">Mode Madonna</option>
+			<option value="ouragan">Mode Ouragan</option>
+		</select>
+	</div>
+
+	<!-- Chargement des scripts -->
+	<script src="src/gestion_alarme.js"></script>
+	<script src="src/afficher_heure.js"></script>
+	<script src="src/script.js"></script>
+
+</body>
+
+</html>
