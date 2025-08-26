@@ -1,5 +1,5 @@
 /**
- * Script permettant de définir les alarmes et créer les alertes (v2)
+ * Script permettant de définir les alarmes et créer les alertes
  * 
  */
 
