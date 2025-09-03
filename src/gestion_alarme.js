@@ -1,6 +1,6 @@
 /**
  * Script permettant de définir les alarmes et créer les alertes
- * 
+ * Auteur : Alan Join
  */
 
 /* Configuration des éléments par défauts sur le site*/
