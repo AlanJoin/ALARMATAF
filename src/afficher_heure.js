@@ -1,6 +1,6 @@
 /**
  * Script permettant d'afficher l'heure sur le site
- * 
+ * Auteur : Alan Join
  */
 
 /* Variables du script */

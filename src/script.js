@@ -1,5 +1,6 @@
 /**
  * Script permettant de définir des fonctionnalités annexes (son de test, maintient de l'écran en veille....)
+ * Auteur : Alan Join
  */
 
 /**Ajout de l'évenement "entrée" à tous les inputs */
