@@ -189,7 +189,6 @@ function setAlarmePrepaTAF() {
         }
     }
 }
-
 /**
  * Fonction pour renvoyer le prochain reveil (en heure locale) en heure UTC
  */
@@ -256,7 +255,9 @@ function setReveilMatin(){
     let heureReveil = getNextReveilUTC(5).toISOString().split('T');
     gestionAlarme({est_input:false, date:heureReveil[0], heure:heureReveil[1].substring(0, 5), id_checkbox:"alarme_reveil_vac", label:"Réveil"});
 }
-
+/**
+ * Fonction pour l'annulation des TAFs pendant la vacation nocturne (soit à 19h et 20h locales)
+ */
 function setAnnulTAF(){
     let now = (new Date()).toISOString().split('T'); // Array [jour, heure]
 
