@@ -115,6 +115,9 @@ function gestionAlarme({est_input=true, date, heure, id_checkbox, label}={}) {
         if (id_checkbox === "alarme_reveil_vac") {
             alarmeDiv.classList.add("alarme-reveil");
         }
+        if (id_checkbox === "alarme_annul_TAF") {
+            alarmeDiv.classList.add("alarme-annul");
+        }
     }
 
     alarmeDiv.innerHTML = `
@@ -188,9 +191,9 @@ function setAlarmePrepaTAF() {
 }
 
 /**
- * Fonction pour renvoyer le prochain reveil (5h local du matin) en heure UTC
+ * Fonction pour renvoyer le prochain reveil (en heure locale) en heure UTC
  */
-function getNextReveilUTC() {
+function getNextReveilUTC(lochour) {
   const timeZone = 'Europe/Paris';
   const now = new Date();
 
@@ -220,7 +223,7 @@ function getNextReveilUTC() {
     parseInt(year),
     parseInt(month) - 1,
     parseInt(day),
-    5 - (totalOffsetMinutes / 60),
+    lochour - (totalOffsetMinutes / 60),
     0, 0, 0
   ));
 
@@ -238,7 +241,7 @@ function getNextReveilUTC() {
       parseInt(yearT),
       parseInt(monthT) - 1,
       parseInt(dayT),
-      5 - (totalOffsetMinutes / 60),
+      lochour - (totalOffsetMinutes / 60),
       0, 0, 0
     ));
   }
@@ -250,8 +253,20 @@ function getNextReveilUTC() {
  * Fonction pour définir le reveil à 5 heures du matin
  */
 function setReveilMatin(){
-    let heureReveil = getNextReveilUTC().toISOString().split('T');
+    let heureReveil = getNextReveilUTC(5).toISOString().split('T');
     gestionAlarme({est_input:false, date:heureReveil[0], heure:heureReveil[1].substring(0, 5), id_checkbox:"alarme_reveil_vac", label:"Réveil"});
+}
+
+function setAnnulTAF(){
+    let now = (new Date()).toISOString().split('T'); // Array [jour, heure]
+
+    if (now[1] <= "16:40") {
+        let heureAnnul = getNextReveilUTC(19).toISOString().split('T');
+        gestionAlarme({est_input:false, date:heureAnnul[0], heure:heureAnnul[1].substring(0, 5), id_checkbox:"alarme_annul_TAF", label:"Annulation des TAFs N°1"});
+
+        heureAnnul = getNextReveilUTC(20).toISOString().split('T');
+        gestionAlarme({est_input:false, date:heureAnnul[0], heure:heureAnnul[1].substring(0, 5), id_checkbox:"alarme_annul_TAF", label:"Annulation des TAFs N°2"});
+    }
 }
 
 

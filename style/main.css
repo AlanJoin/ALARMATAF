@@ -80,6 +80,7 @@ h3 {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	padding: 20px;
 	width: 500px;
+	height: 410px;
 }
 /* Personnalisation des alarmes */
 #prog-alarme {
@@ -151,7 +152,7 @@ h3 {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	padding: 20px;
 	width: 400px;
-	height: 380px;
+	height: 410px;
 }
 #listeAlarmes {
 	margin-top: 20px;
@@ -180,6 +181,9 @@ h3 {
 }
 .alarme-reveil {
 	background-color: #defcf9;
+}
+.alarme-annul {
+	background-color: #fdb9ac;
 }
 .supp-alarme {
   background-color: rgba(140, 140, 140, 0.338);
