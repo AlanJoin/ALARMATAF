@@ -259,15 +259,11 @@ function setReveilMatin(){
  * Fonction pour l'annulation des TAFs pendant la vacation nocturne (soit à 19h et 20h locales)
  */
 function setAnnulTAF(){
-    let now = (new Date()).toISOString().split('T'); // Array [jour, heure]
+    let heureAnnul = getNextReveilUTC(19).toISOString().split('T');
+    gestionAlarme({est_input:false, date:heureAnnul[0], heure:heureAnnul[1].substring(0, 5), id_checkbox:"alarme_annul_TAF", label:"Annulation des TAFs N°1"});
 
-    if (now[1] <= "16:40") {
-        let heureAnnul = getNextReveilUTC(19).toISOString().split('T');
-        gestionAlarme({est_input:false, date:heureAnnul[0], heure:heureAnnul[1].substring(0, 5), id_checkbox:"alarme_annul_TAF", label:"Annulation des TAFs N°1"});
-
-        heureAnnul = getNextReveilUTC(20).toISOString().split('T');
-        gestionAlarme({est_input:false, date:heureAnnul[0], heure:heureAnnul[1].substring(0, 5), id_checkbox:"alarme_annul_TAF", label:"Annulation des TAFs N°2"});
-    }
+    heureAnnul = getNextReveilUTC(20).toISOString().split('T');
+    gestionAlarme({est_input:false, date:heureAnnul[0], heure:heureAnnul[1].substring(0, 5), id_checkbox:"alarme_annul_TAF", label:"Annulation des TAFs N°2"});
 }
 
 
